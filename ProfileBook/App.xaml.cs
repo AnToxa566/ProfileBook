@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ProfileBook.Views;
 
 namespace ProfileBook
 {
@@ -10,7 +11,7 @@ namespace ProfileBook
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new SignInView());
         }
 
         protected override void OnStart()
