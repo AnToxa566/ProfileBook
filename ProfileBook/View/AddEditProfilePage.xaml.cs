@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace ProfileBook.Views
+namespace ProfileBook.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SingUpView : ContentPage
+    public partial class AddEditProfilePage : ContentPage
     {
-        public SingUpView()
+        public AddEditProfilePage()
         {
             InitializeComponent();
-            Title = "Users SingUp";
+            Title = "Add Profile";
         }
     }
 }

@@ -11,21 +11,35 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.8.0.1451" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Prism.Unity.Forms" Version="8.0.0.1909" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\SignInView.xaml">
+    <EmbeddedResource Update="View\AddEditProfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SingUpView.xaml">
+    <EmbeddedResource Update="View\MainListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\SingInPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\SingUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
+    <Compile Update="View\MainListPage.xaml.cs">
+      <DependentUpon>MainListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\SingInPage.xaml.cs">
+      <DependentUpon>SingInPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="View\SingUpPage.xaml.cs">
+      <DependentUpon>SingUpPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

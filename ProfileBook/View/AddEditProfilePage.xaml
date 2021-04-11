@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProfileBook.View.AddEditProfilePage">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="save.png" 
+                     Order="Primary" Priority="0" 
+                     Command="{Binding SaveEditTapCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <RelativeLayout>
+        <Image Source="profile.png" WidthRequest="200"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-100}"   
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=50}"
+        />
+
+        <Entry x:Name="nickNameEntry" Placeholder="NickName" WidthRequest="300"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=300}"
+        />
+
+        <Entry x:Name="nameEntry" Placeholder="Name" WidthRequest="300"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=375}"   
+        />
+
+        <Editor x:Name="infoEditor" BackgroundColor="#f0f0f0" HeightRequest="200" WidthRequest="300"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=475}"   
+        />
+    </RelativeLayout>
+
+</ContentPage>
