@@ -4,24 +4,41 @@
              x:Class="ProfileBook.View.SingInPage">
 
     <RelativeLayout>
-        <Entry x:Name="loginEntry" Placeholder="Login" WidthRequest="300"
+        <Entry Placeholder="Login" 
+               WidthRequest="300" 
+               Text="{Binding Login}"
+               
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=200}"
         />
 
-        <Entry x:Name="passwordEntry" Placeholder="Password" IsPassword="True" WidthRequest="300"
+        <Entry Placeholder="Password" 
+               IsPassword="True" 
+               WidthRequest="300" 
+               Text="{Binding Password}"
+               
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=275}"   
         />
 
-        <Button Text="SING IN" WidthRequest="300" HeightRequest="60" Command="{Binding SingInTapCommand}"
+        <Button Text="SING IN" 
+                WidthRequest="300" 
+                HeightRequest="60" 
+                Command="{Binding SingInTapCommand}"
+                
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=550}"
         />
 
-        <Label Text="SING UP" TextColor="Blue" TextDecorations="Underline" WidthRequest="100" HorizontalTextAlignment="Center"
+        <Label Text="SING UP"
+               TextColor="Blue"
+               TextDecorations="Underline"
+               WidthRequest="100"
+               HorizontalTextAlignment="Center"
+               
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-50}"   
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=625}">
+            
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding ToSingUpPageTapCommand}"/>
             </Label.GestureRecognizers>
