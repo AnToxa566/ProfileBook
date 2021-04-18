@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using Acr.UserDialogs;
+using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace ProfileBook.ViewModel
         {
             _navigationService = navigationService;
 
-            SingInTapCommand = new Command(SingInTap, LoginAllowed);
+            SingInTapCommand = new Command(SingInTap, SingInAllowed);
             ToSingUpPageTapCommand = new Command(ToSingUpPageTap);
         }
 
@@ -58,7 +59,14 @@ namespace ProfileBook.ViewModel
 
         private async void SingInTap(object obj)
         {
-            await _navigationService.NavigateAsync("MainListPage");
+            // TODO: Хардкорная проверка пользователя
+            if (_login != "q" || _password != "q")
+            {
+                await UserDialogs.Instance.AlertAsync("Invalid login or password!");
+                Password = string.Empty;
+            }
+            else
+                await _navigationService.NavigateAsync("MainListPage");
         }
 
         private async void ToSingUpPageTap()
@@ -68,6 +76,8 @@ namespace ProfileBook.ViewModel
 
         #endregion
 
-        public bool LoginAllowed(object obj) => !string.IsNullOrEmpty(_login) && !string.IsNullOrEmpty(_password);
+        public bool SingInAllowed(object obj) => 
+            !string.IsNullOrEmpty(_login) && 
+            !string.IsNullOrEmpty(_password);
     }
 }

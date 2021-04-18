@@ -5,6 +5,8 @@ using Prism.Unity;
 using Prism.Ioc;
 using ProfileBook.View;
 using ProfileBook.ViewModel;
+using ProfileBook.Services.Repository;
+using System.IO;
 
 namespace ProfileBook
 {
@@ -18,10 +20,14 @@ namespace ProfileBook
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            //Services
+            containerRegistry.RegisterInstance<IRepository>(Container.Resolve<Repository>());
+
+            //Navigation
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SingInPage, SingInViewModel>();
             containerRegistry.RegisterForNavigation<SingUpPage, SingUpViewModel>();
-            containerRegistry.RegisterForNavigation<MainListPage, MailListViewModel>();
+            containerRegistry.RegisterForNavigation<MainListPage, MainListViewModel>();
             containerRegistry.RegisterForNavigation<AddEditProfilePage, AddEditProfileViewModel>();
         }
 

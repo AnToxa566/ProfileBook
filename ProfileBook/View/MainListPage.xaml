@@ -4,9 +4,9 @@
              x:Class="ProfileBook.View.MainListPage">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="log_out.png" 
-                     Order="Primary" Priority="0" 
-                     Command="{Binding LogOutTapCommand}"/>
+        <ToolbarItem Command="{Binding LogOutTapCommand}"
+                     IconImageSource="log_out.png" 
+                     Order="Primary" Priority="0"/>
     </ContentPage.ToolbarItems>
 
     <Grid>
@@ -14,21 +14,25 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ListView Grid.Row="0"
+        <ListView ItemsSource="{Binding ProfileList}"
+                  Grid.Row="0"
                   HasUnevenRows="True"
-                  ItemsSource="{Binding ProfileList}"
                   SeparatorVisibility="None"
-                  SelectionMode="None"
-                  CachingStrategy="RecycleElement">
+                  SelectionMode="None">
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.ContextActions>
                             <MenuItem Text="EDIT"
-                                      Command="{Binding EditTapCommand}"/>
+                                      Command="{Binding Path=ListViewModel.EditTapCommand}" 
+                                      CommandParameter="{Binding}"/>
+                            
                             <MenuItem Text="DELETE"
-                                      Command="{Binding DeleteTapCommand}"/>
+                                      Command="{Binding Path=ListViewModel.DeleteTapCommand}" 
+                                      CommandParameter="{Binding}"/>
                         </ViewCell.ContextActions>
+                        
                         <StackLayout Orientation="Horizontal" Spacing="15" Padding="20">
                             <Image Source="{Binding ImagePath}" WidthRequest="100" HeightRequest="100"/>
                             <StackLayout>
@@ -42,15 +46,16 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Label Grid.Row="0"
-               Text="No profiles added."
+        <Label Text="{Binding NoProfilesAdded}"
+               Grid.Row="0"
                TextColor="#d7d7d7"
                FontSize="Medium"
                HorizontalOptions="Center"
-               VerticalOptions="Center"/>
+               VerticalOptions="Center"
+        />
 
-        <Button Text="Add" 
-                Command="{Binding AddProfileTapCommand}"
+        <Button Command="{Binding AddProfileTapCommand}"
+                Text="Add" 
                 BorderColor="#4a80aa" 
                 BorderWidth="6" 
                 FontAttributes="Bold" 
@@ -61,7 +66,8 @@
                 WidthRequest="75" 
                 HeightRequest="75" 
                 Margin="0,0,40,40" 
-                VerticalOptions="End"/>
+                VerticalOptions="End"
+        />
     </Grid>
 
 </ContentPage>

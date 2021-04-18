@@ -10,22 +10,39 @@
     </ContentPage.ToolbarItems>
 
     <RelativeLayout>
-        <Image Source="profile.png" WidthRequest="200"
+        <Image Source="{Binding ImagePath}"
+               WidthRequest="200"
+               
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-100}"   
-            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=50}"
-        />
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=50}">
+            
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SetImageTapCommand}"/>
+            </Image.GestureRecognizers>
+        </Image>
 
-        <Entry x:Name="nickNameEntry" Placeholder="NickName" WidthRequest="300"
+        <Entry Text="{Binding NickName}"
+               Placeholder="NickName"
+               WidthRequest="300"
+               
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=300}"
         />
 
-        <Entry x:Name="nameEntry" Placeholder="Name" WidthRequest="300"
+        <Entry Text="{Binding Name}" 
+               Placeholder="Name"
+               WidthRequest="300"
+               
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=375}"   
         />
 
-        <Editor x:Name="infoEditor" BackgroundColor="#f0f0f0" HeightRequest="200" WidthRequest="300"
+        <Editor Text="{Binding Description}"
+                BackgroundColor="#f0f0f0"
+                HeightRequest="200"
+                WidthRequest="300"
+                MaxLength="120"
+                
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=475}"   
         />
