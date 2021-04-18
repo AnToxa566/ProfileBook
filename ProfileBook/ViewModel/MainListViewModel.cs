@@ -13,19 +13,19 @@ namespace ProfileBook.ViewModel
     public class MainListViewModel : BindableBase, IPageLifecycleAware
     {
         private INavigationService _navigationService;
-        private IRepository _repository;
+        private IProfileRepository _profileRepository;
 
-        public MainListViewModel(INavigationService navigationService, IRepository repository)
+        public MainListViewModel(INavigationService navigationService, IProfileRepository repository)
         {
             _navigationService = navigationService;
-            _repository = repository;
+            _profileRepository = repository;
         }
 
         #region ---Public Methods---
 
         public async void OnAppearing()
          {
-            var profileList = await _repository.GetAllAsync<Profile>();
+            var profileList = await _profileRepository.GetAllAsync<Profile>();
             ProfileList = new ObservableCollection<Profile>(profileList);
 
             if (ProfileList.Count == 0)
@@ -88,7 +88,7 @@ namespace ProfileBook.ViewModel
             foreach (var item in ProfileList)
             {
                 item.IsSelected = false;
-                await _repository.UpdateAsync(item);
+                await _profileRepository.UpdateAsync(item);
             }
 
             await _navigationService.NavigateAsync("AddEditProfilePage");
@@ -104,11 +104,11 @@ namespace ProfileBook.ViewModel
             foreach (var item in ProfileList)
             {
                 item.IsSelected = false;
-                await _repository.UpdateAsync(item);
+                await _profileRepository.UpdateAsync(item);
             }
 
             profile.IsSelected = true;
-            await _repository.UpdateAsync(profile);
+            await _profileRepository.UpdateAsync(profile);
 
             await _navigationService.NavigateAsync("AddEditProfilePage");
         }
@@ -126,7 +126,7 @@ namespace ProfileBook.ViewModel
             if (delete)
             {
                 ProfileList.Remove(profile);
-                await _repository.DeletAsync(profile);
+                await _profileRepository.DeletAsync(profile);
             }
 
             if (ProfileList.Count == 0)

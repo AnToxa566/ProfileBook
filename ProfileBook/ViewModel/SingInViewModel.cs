@@ -1,17 +1,21 @@
 ﻿using Acr.UserDialogs;
 using Prism.Mvvm;
 using Prism.Navigation;
+using ProfileBook.Model;
+using ProfileBook.Services.Repository;
 using Xamarin.Forms;
 
 namespace ProfileBook.ViewModel
 {
     public class SingInViewModel : BindableBase
     {
-        private readonly INavigationService _navigationService;
+        private INavigationService _navigationService;
+        private IUserRepository _userRepository;
 
-        public SingInViewModel(INavigationService navigationService)
+        public SingInViewModel(INavigationService navigationService, IUserRepository repository)
         {
             _navigationService = navigationService;
+            _userRepository = repository;
 
             SingInTapCommand = new Command(SingInTap, SingInAllowed);
             ToSingUpPageTapCommand = new Command(ToSingUpPageTap);
@@ -41,6 +45,13 @@ namespace ProfileBook.ViewModel
             }
         }
 
+        private bool _isUser;
+        public bool IsUser
+        {
+            get => _isUser;
+            set => SetProperty(ref _isUser, value);
+        }
+
         #endregion
 
         #region ---Command---
@@ -55,8 +66,20 @@ namespace ProfileBook.ViewModel
 
         private async void SingInTap(object obj)
         {
-            // TODO: Хардкорная проверка пользователя
-            if (_login != "q" || _password != "q")
+            var userList = await _userRepository.GetAllAsync<User>();
+            IsUser = false;
+
+            foreach (var item in userList)
+            {
+                if (_login == item.Login && _password == item.Password)
+                {
+                    IsUser = true;
+                    break;
+                }
+            }
+
+
+            if (!IsUser)
             {
                 await UserDialogs.Instance.AlertAsync("Invalid login or password!");
                 Password = string.Empty;

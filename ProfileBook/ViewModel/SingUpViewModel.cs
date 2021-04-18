@@ -1,17 +1,21 @@
 ﻿using Acr.UserDialogs;
 using Prism.Mvvm;
 using Prism.Navigation;
+using ProfileBook.Model;
+using ProfileBook.Services.Repository;
 using Xamarin.Forms;
 
 namespace ProfileBook.ViewModel
 {
     public class SingUpViewModel : BindableBase
     {
-        private readonly INavigationService _navigationService;
+        private INavigationService _navigationService;
+        private IUserRepository _userRepository;
 
-        public SingUpViewModel(INavigationService navigationService)
+        public SingUpViewModel(INavigationService navigationService, IUserRepository repository)
         {
             _navigationService = navigationService;
+            _userRepository = repository;
 
             SingUpTapCommand = new Command(SingUpTap, SingUpAllowed);
         }
@@ -51,6 +55,13 @@ namespace ProfileBook.ViewModel
             }
         }
 
+        private bool _isLoginBusy;
+        public bool IsLoginBusy
+        {
+            get => _isLoginBusy;
+            set => SetProperty(ref _isLoginBusy, value);
+        }
+
         #endregion
 
         #region ---Command---
@@ -63,16 +74,39 @@ namespace ProfileBook.ViewModel
 
         private async void SingUpTap(object obj)
         {
-            if (Login.Length < 4 || Login.Length > 16)
-                await UserDialogs.Instance.AlertAsync("Login must be at least 4 and no more than 16 characters!");
-            else if (Password != ConfirmPassword)
-                await UserDialogs.Instance.AlertAsync("Password does not coincide!");
-            else if (Password.Length < 8 || Password.Length > 16)
-                await UserDialogs.Instance.AlertAsync("Password must be at least 8 and no more than 16 characters!");
-            else if (Login == "Anton") // TODO: Захардкоренная проверка на логин в БД 
-                await UserDialogs.Instance.AlertAsync("This login is already taken!");
-            else
-                await _navigationService.NavigateAsync("/NavigationPage/SingInPage");
+            var userList = await _userRepository.GetAllAsync<User>();
+            IsLoginBusy = false;
+
+            foreach (var item in userList)
+            {
+                if (_login == item.Login)
+                {
+                    await UserDialogs.Instance.AlertAsync("This login is already taken!");
+                    IsLoginBusy = true;
+                    break;
+                }
+            }
+
+            if (!IsLoginBusy)
+            {
+                if (Login.Length < 4 || Login.Length > 16)
+                    await UserDialogs.Instance.AlertAsync("Login must be at least 4 and no more than 16 characters!");
+                else if (Password != ConfirmPassword)
+                    await UserDialogs.Instance.AlertAsync("Password does not coincide!");
+                else if (Password.Length < 8 || Password.Length > 16)
+                    await UserDialogs.Instance.AlertAsync("Password must be at least 8 and no more than 16 characters!");
+                else
+                {
+                    var user = new User
+                    {
+                        Login = Login,
+                        Password = Password
+                    };
+
+                    await _userRepository.InsertAsync(user);
+                    await _navigationService.NavigateAsync("/NavigationPage/SingInPage");
+                }
+            }
         }
 
         #endregion

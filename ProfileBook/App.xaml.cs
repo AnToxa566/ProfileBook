@@ -18,7 +18,8 @@ namespace ProfileBook
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //Services
-            containerRegistry.RegisterInstance<IRepository>(Container.Resolve<Repository>());
+            containerRegistry.RegisterInstance<IProfileRepository>(Container.Resolve<ProfileAsyncRepository>());
+            containerRegistry.RegisterInstance<IUserRepository>(Container.Resolve<UserAsyncRepository>());
 
             //Navigation
             containerRegistry.RegisterForNavigation<NavigationPage>();

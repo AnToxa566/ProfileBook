@@ -16,12 +16,12 @@ namespace ProfileBook.ViewModel
     public class AddEditProfileViewModel : BindableBase, IPageLifecycleAware
     {
         private INavigationService _navigationService;
-        private IRepository _repository;
+        private IProfileRepository _profileRepository;
 
-        public AddEditProfileViewModel(INavigationService navigationService, IRepository repository)
+        public AddEditProfileViewModel(INavigationService navigationService, IProfileRepository repository)
         {
             _navigationService = navigationService;
-            _repository = repository;
+            _profileRepository = repository;
 
             Saved = false;
             FirstOnAppearing = true;
@@ -32,7 +32,7 @@ namespace ProfileBook.ViewModel
 
         public async void OnAppearing()
         {
-            var profileList = await _repository.GetAllAsync<Profile>();
+            var profileList = await _profileRepository.GetAllAsync<Profile>();
             ProfileList = new ObservableCollection<Profile>(profileList);
 
             foreach (var item in ProfileList)
@@ -83,7 +83,7 @@ namespace ProfileBook.ViewModel
                         item.Description = Description;
                         item.ImagePath = ImagePath;
 
-                        await _repository.UpdateAsync(item);
+                        await _profileRepository.UpdateAsync(item);
 
                         break;
                     }
@@ -102,7 +102,7 @@ namespace ProfileBook.ViewModel
                     ImagePath = ImagePath
                 };
 
-                var id = await _repository.InsertAsync(profile);
+                var id = await _profileRepository.InsertAsync(profile);
                 profile.Id = id;
 
                 await _navigationService.GoBackAsync();

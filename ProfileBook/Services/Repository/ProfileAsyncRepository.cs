@@ -7,11 +7,11 @@ using System.IO;
 
 namespace ProfileBook.Services.Repository
 {
-    public class Repository : IRepository
+    public class ProfileAsyncRepository : IProfileRepository
     {
         private Lazy<SQLiteAsyncConnection> _database;
 
-        public Repository()
+        public ProfileAsyncRepository()
         {
             _database = new Lazy<SQLiteAsyncConnection>(() =>
             {

@@ -4,7 +4,7 @@ using ProfileBook.Model;
 
 namespace ProfileBook.Services.Repository
 {
-    public interface IRepository
+    public interface IProfileRepository
     {
         Task<int> InsertAsync<T>(T entity) where T : IEntityBase, new();
 
