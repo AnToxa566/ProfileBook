@@ -4,36 +4,36 @@
              x:Class="ProfileBook.View.SingUpPage">
     
     <RelativeLayout>
-        <Entry Placeholder="Login" 
+        <Entry Text="{Binding Login}"
+               Placeholder="Login" 
                WidthRequest="300"
-               Text="{Binding Login}"
                
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=200}"
         />
 
-        <Entry Placeholder="Password" 
+        <Entry Text="{Binding Password}"
+               Placeholder="Password" 
                IsPassword="True" 
                WidthRequest="300"
-               Text="{Binding Password}"
                
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=275}"   
         />
 
-        <Entry Placeholder="Confirm Password" 
+        <Entry Text="{Binding ConfirmPassword}"
+               Placeholder="Confirm Password" 
                IsPassword="True" 
                WidthRequest="300"
-               Text="{Binding ConfirmPassword}"
                
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=350}"   
         />
 
-        <Button Text="SING UP" 
+        <Button Command="{Binding SingUpTapCommand}" 
+                Text="SING UP" 
                 WidthRequest="300" 
-                HeightRequest="60" 
-                Command="{Binding SingUpTapCommand}"
+                HeightRequest="60"
                 
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-150}"   
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0, Constant=550}"

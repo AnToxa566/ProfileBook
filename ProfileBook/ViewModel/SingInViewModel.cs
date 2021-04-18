@@ -1,10 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ProfileBook.ViewModel
@@ -76,8 +72,13 @@ namespace ProfileBook.ViewModel
 
         #endregion
 
+        #region ---SingUpAllowed---
+
         public bool SingInAllowed(object obj) => 
             !string.IsNullOrEmpty(_login) && 
             !string.IsNullOrEmpty(_password);
+
+        #endregion
+
     }
 }

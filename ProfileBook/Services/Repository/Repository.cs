@@ -1,7 +1,6 @@
 ﻿using ProfileBook.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using SQLite;
 using System.IO;
@@ -25,6 +24,8 @@ namespace ProfileBook.Services.Repository
             });
         }
 
+        #region ---Public Methods---
+
         public Task<int> DeletAsync<T>(T entity) where T : IEntityBase, new()
         {
             return _database.Value.DeleteAsync(entity);
@@ -44,5 +45,8 @@ namespace ProfileBook.Services.Repository
         {
             return _database.Value.UpdateAsync(entity);
         }
+
+        #endregion
+
     }
 }

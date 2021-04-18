@@ -1,6 +1,4 @@
-﻿using Prism.Navigation;
-using ProfileBook.ViewModel;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ProfileBook.View

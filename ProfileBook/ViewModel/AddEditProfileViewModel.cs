@@ -1,14 +1,12 @@
-﻿using Acr.UserDialogs;
-using Prism.AppModel;
+﻿using System;
 using Prism.Mvvm;
+using Prism.AppModel;
 using Prism.Navigation;
+using Acr.UserDialogs;
 using ProfileBook.Model;
 using ProfileBook.Services.Repository;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;

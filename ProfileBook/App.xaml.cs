@@ -1,12 +1,9 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 using Prism.Unity;
 using Prism.Ioc;
 using ProfileBook.View;
 using ProfileBook.ViewModel;
 using ProfileBook.Services.Repository;
-using System.IO;
 
 namespace ProfileBook
 {

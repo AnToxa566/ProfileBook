@@ -4,9 +4,9 @@
              x:Class="ProfileBook.View.AddEditProfilePage">
     
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="save.png" 
-                     Order="Primary" Priority="0" 
-                     Command="{Binding SaveEditTapCommand}"/>
+        <ToolbarItem Command="{Binding SaveEditTapCommand}"
+                     IconImageSource="save.png" 
+                     Order="Primary" Priority="0"/>
     </ContentPage.ToolbarItems>
 
     <RelativeLayout>
