@@ -14,14 +14,16 @@ namespace ProfileBook.ViewModel
     {
         private INavigationService _navigationService;
         private IProfileRepository _profileRepository;
+        private IUserRepository _userRepository;
 
-        public MainListViewModel(INavigationService navigationService, IProfileRepository repository)
+        public MainListViewModel(INavigationService navigationService, IProfileRepository profileRepository, IUserRepository userRepository)
         {
             _navigationService = navigationService;
-            _profileRepository = repository;
+            _profileRepository = profileRepository;
+            _userRepository = userRepository;
         }
 
-        #region ---Public Methods---
+        #region ---Appearing---
 
         public async void OnAppearing()
          {
@@ -80,7 +82,19 @@ namespace ProfileBook.ViewModel
 
         private async void LogOutTap()
         {
-            await _navigationService.NavigateAsync("/NavigationPage/SingInPage");
+            var userList = await _userRepository.GetAllAsync<User>();
+
+            foreach (var item in userList)
+            {
+                if (item.IsAuthorization)
+                {
+                    item.IsAuthorization = false;
+                    await _userRepository.UpdateAsync(item);
+
+                    await _navigationService.NavigateAsync("/NavigationPage/SingInPage");
+                    break;
+                }
+            }
         }
 
         private async void AddProfileTap()

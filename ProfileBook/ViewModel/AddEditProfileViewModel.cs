@@ -28,7 +28,7 @@ namespace ProfileBook.ViewModel
             ImagePath = "profile.png";
         }
 
-        #region ---Public Methods---
+        #region ---Appearing---
 
         public async void OnAppearing()
         {

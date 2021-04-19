@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using Prism.AppModel;
 using Prism.Mvvm;
 using Prism.Navigation;
 using ProfileBook.Model;
@@ -7,7 +8,7 @@ using Xamarin.Forms;
 
 namespace ProfileBook.ViewModel
 {
-    public class SingInViewModel : BindableBase
+    public class SingInViewModel : BindableBase, IPageLifecycleAware
     {
         private INavigationService _navigationService;
         private IUserRepository _userRepository;
@@ -20,6 +21,26 @@ namespace ProfileBook.ViewModel
             SingInTapCommand = new Command(SingInTap, SingInAllowed);
             ToSingUpPageTapCommand = new Command(ToSingUpPageTap);
         }
+
+        #region ---Appearing---
+
+        public async void OnAppearing()
+        {
+            var userList = await _userRepository.GetAllAsync<User>();
+
+            foreach (var item in userList)
+            {
+                if (item.IsAuthorization)
+                {
+                    await _navigationService.NavigateAsync("MainListPage");
+                    break;
+                }
+            }
+        }
+
+        public void OnDisappearing(){}
+
+        #endregion
 
         #region ---Property---
 
@@ -74,6 +95,10 @@ namespace ProfileBook.ViewModel
                 if (_login == item.Login && _password == item.Password)
                 {
                     IsUser = true;
+
+                    item.IsAuthorization = true;
+                    await _userRepository.UpdateAsync(item);
+
                     break;
                 }
             }

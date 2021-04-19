@@ -9,5 +9,7 @@ namespace ProfileBook.Model
 
         public string Login { get; set; }
         public string Password { get; set; }
+
+        public bool IsAuthorization { get; set; }
     }
 }

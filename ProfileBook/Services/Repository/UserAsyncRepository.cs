@@ -36,6 +36,11 @@ namespace ProfileBook.Services.Repository
             return _database.Value.InsertAsync(entity);
         }
 
+        public Task<int> UpdateAsync<T>(T entity) where T : IEntityBase, new()
+        {
+            return _database.Value.UpdateAsync(entity);
+        }
+
         #endregion
 
     }
