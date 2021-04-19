@@ -17,11 +17,13 @@ namespace ProfileBook.ViewModel
     {
         private INavigationService _navigationService;
         private IProfileRepository _profileRepository;
+        private IUserRepository _userRepository;
 
-        public AddEditProfileViewModel(INavigationService navigationService, IProfileRepository repository)
+        public AddEditProfileViewModel(INavigationService navigationService, IProfileRepository profileRepository, IUserRepository userRepository)
         {
             _navigationService = navigationService;
-            _profileRepository = repository;
+            _profileRepository = profileRepository;
+            _userRepository = userRepository;
 
             Saved = false;
             FirstOnAppearing = true;
@@ -32,6 +34,16 @@ namespace ProfileBook.ViewModel
 
         public async void OnAppearing()
         {
+            var userList = await _userRepository.GetAllAsync<User>();
+            foreach (var item in userList)
+            {
+                if (item.IsAuthorization)
+                {
+                    UserID = item.Id;
+                    break;
+                }
+            }
+
             var profileList = await _profileRepository.GetAllAsync<Profile>();
             ProfileList = new ObservableCollection<Profile>(profileList);
 
@@ -99,8 +111,9 @@ namespace ProfileBook.ViewModel
                     Name = Name,
                     Description = Description,
                     CreationTime = DateTime.Now,
-                    ImagePath = ImagePath
-                };
+                    ImagePath = ImagePath,
+                    UserId = UserID
+            };
 
                 var id = await _profileRepository.InsertAsync(profile);
                 profile.Id = id;
@@ -204,6 +217,13 @@ namespace ProfileBook.ViewModel
         {
             get => _firstOnAppearing;
             set => SetProperty(ref _firstOnAppearing, value);
+        }
+
+        private int _userId;
+        public int UserID
+        {
+            get => _userId;
+            set => SetProperty(ref _userId, value);
         }
 
         #endregion

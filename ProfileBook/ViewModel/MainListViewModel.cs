@@ -5,6 +5,7 @@ using Prism.Navigation;
 using ProfileBook.Model;
 using ProfileBook.Services.Repository;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -26,8 +27,20 @@ namespace ProfileBook.ViewModel
         #region ---Appearing---
 
         public async void OnAppearing()
-         {
-            var profileList = await _profileRepository.GetAllAsync<Profile>();
+        {
+            var userList = await _userRepository.GetAllAsync<User>();
+            foreach (var item in userList)
+            {
+                if (item.IsAuthorization)
+                {
+                    UserID = item.Id;
+                    break;
+                }
+            }
+
+            var profiles = await _profileRepository.GetAllAsync<Profile>();
+            var profileList = profiles.Where(item => item.UserId == UserID);
+
             ProfileList = new ObservableCollection<Profile>(profileList);
 
             if (ProfileList.Count == 0)
@@ -62,6 +75,13 @@ namespace ProfileBook.ViewModel
         {
             get => _profileList;
             set => SetProperty(ref _profileList, value);
+        }
+
+        private int _userId;
+        public int UserID
+        {
+            get => _userId;
+            set => SetProperty(ref _userId, value);
         }
 
         #endregion

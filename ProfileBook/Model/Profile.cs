@@ -16,6 +16,7 @@ namespace ProfileBook.Model
         public DateTime CreationTime { get; set; }
 
         public bool IsSelected { get; set; }
+        public int UserId { get; set; }
         [Ignore]
         public MainListViewModel ListViewModel { get; set; }
     }
