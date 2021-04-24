@@ -11,6 +11,8 @@
 
     <RelativeLayout>
         <Image Source="{Binding ImagePath}"
+               Aspect="AspectFit"
+               HeightRequest="200"
                WidthRequest="200"
                
             RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5, Constant=-100}"   

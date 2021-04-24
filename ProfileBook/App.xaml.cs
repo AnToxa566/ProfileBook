@@ -32,8 +32,7 @@ namespace ProfileBook
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
-            var result = await NavigationService.NavigateAsync("NavigationPage/SingInPage");
+            await NavigationService.NavigateAsync("NavigationPage/SingInPage");
         }
         protected override void OnStart()
         {
