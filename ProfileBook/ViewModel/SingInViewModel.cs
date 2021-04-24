@@ -11,9 +11,9 @@ namespace ProfileBook.ViewModel
     public class SingInViewModel : BindableBase, IPageLifecycleAware
     {
         private INavigationService _navigationService;
-        private IUserRepository _userRepository;
+        private UserAsyncRepository _userRepository;
 
-        public SingInViewModel(INavigationService navigationService, IUserRepository repository)
+        public SingInViewModel(INavigationService navigationService, UserAsyncRepository repository)
         {
             _navigationService = navigationService;
             _userRepository = repository;

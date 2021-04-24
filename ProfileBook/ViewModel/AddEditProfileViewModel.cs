@@ -16,10 +16,10 @@ namespace ProfileBook.ViewModel
     public class AddEditProfileViewModel : BindableBase, IPageLifecycleAware
     {
         private INavigationService _navigationService;
-        private IProfileRepository _profileRepository;
-        private IUserRepository _userRepository;
+        private ProfileAsyncRepository _profileRepository;
+        private UserAsyncRepository _userRepository;
 
-        public AddEditProfileViewModel(INavigationService navigationService, IProfileRepository profileRepository, IUserRepository userRepository)
+        public AddEditProfileViewModel(INavigationService navigationService, ProfileAsyncRepository profileRepository, UserAsyncRepository userRepository)
         {
             _navigationService = navigationService;
             _profileRepository = profileRepository;

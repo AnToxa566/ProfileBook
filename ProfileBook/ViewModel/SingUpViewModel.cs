@@ -10,12 +10,12 @@ namespace ProfileBook.ViewModel
     public class SingUpViewModel : BindableBase
     {
         private INavigationService _navigationService;
-        private IUserRepository _userRepository;
+        private UserAsyncRepository _userRepository;
 
-        public SingUpViewModel(INavigationService navigationService, IUserRepository repository)
+        public SingUpViewModel(INavigationService navigationService, UserAsyncRepository userRepository)
         {
             _navigationService = navigationService;
-            _userRepository = repository;
+            _userRepository = userRepository;
 
             SingUpTapCommand = new Command(SingUpTap, SingUpAllowed);
         }

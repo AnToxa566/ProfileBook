@@ -14,10 +14,10 @@ namespace ProfileBook.ViewModel
     public class MainListViewModel : BindableBase, IPageLifecycleAware
     {
         private INavigationService _navigationService;
-        private IProfileRepository _profileRepository;
-        private IUserRepository _userRepository;
+        private ProfileAsyncRepository _profileRepository;
+        private UserAsyncRepository _userRepository;
 
-        public MainListViewModel(INavigationService navigationService, IProfileRepository profileRepository, IUserRepository userRepository)
+        public MainListViewModel(INavigationService navigationService, ProfileAsyncRepository profileRepository, UserAsyncRepository userRepository)
         {
             _navigationService = navigationService;
             _profileRepository = profileRepository;
